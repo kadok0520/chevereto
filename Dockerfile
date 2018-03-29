@@ -30,7 +30,8 @@ RUN mkdir –p /var/www/html/chevereto/ &&
     chown –R www-data:www-data /var/www/html/chevereto/
 WORKDIR /var/www/html/chevereto
 USER www-data
-RUN curl -O https://chevereto.com/download/file/installer &&
+RUN curl -O chevereto.tgz https://github.com/Chevereto/Chevereto-Free/archive/1.0.9.tar.gz &&
+    tar zxvf chevereto.tgz &&
     chmod +x installer
     
 COPY settings.php app/settings.php
