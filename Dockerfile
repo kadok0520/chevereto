@@ -26,18 +26,17 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 RUN a2enmod rewrite
 
 # Download installer script
-RUN mkdir –p /var/www/html/chevereto/ &&
-    chown –R www-data:www-data /var/www/html/chevereto/
-WORKDIR /var/www/html/chevereto
 USER www-data
+WORKDIR /var/www/html/
+
 RUN curl -O chevereto.tgz https://github.com/Chevereto/Chevereto-Free/archive/1.0.9.tar.gz &&
     tar zxvf chevereto.tgz &&
-    chmod +x installer
+    mv Chevereto-Free-1.0.9 Chevereto &&
     
-COPY settings.php app/settings.php
+#COPY settings.php app/settings.php
 
 # Expose the image directory
-VOLUME /var/www/html/images
+VOLUME /var/www/html/Chevereto/images
 
 # Change back to root user for normal Service start up
 USER root
